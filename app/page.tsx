@@ -22,10 +22,10 @@ export default function Home() {
             </div>
             <div className="flex gap-2 items-center">
               <LanguageSelector />
-              <button className="btn-primary text-sm">
+              <button className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-pixel transition-colors flex items-center justify-center">
                 {t.header.export}
               </button>
-              <button className="btn-secondary text-sm">
+              <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-pixel transition-colors flex items-center justify-center">
                 {t.header.save}
               </button>
             </div>

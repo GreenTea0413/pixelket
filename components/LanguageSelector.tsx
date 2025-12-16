@@ -38,7 +38,7 @@ export default function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="btn-secondary text-sm flex items-center gap-2"
+        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-pixel transition-colors flex items-center justify-center gap-2"
       >
         <span>언어: {currentLanguage?.name}</span>
         <span className="text-xs">{isOpen ? '▲' : '▼'}</span>

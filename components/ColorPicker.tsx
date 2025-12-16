@@ -17,8 +17,8 @@ export default function ColorPicker() {
   const [showPicker, setShowPicker] = useState(false);
 
   return (
-    <div className="panel flex flex-col gap-4">
-      <h3 className="text-pixel-label">{t.color.title}</h3>
+    <div className="flex flex-col gap-4 p-4 bg-gray-800 border border-gray-700">
+      <h3 className="text-sm font-pixel text-gray-400">{t.color.title}</h3>
 
       {/* Current Color */}
       <div className="flex items-center gap-3">
