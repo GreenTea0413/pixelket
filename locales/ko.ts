@@ -23,6 +23,15 @@ export const ko = {
     hex: 'HEX',
     presets: '프리셋',
   },
+  canvasSettings: {
+    title: '캔버스 크기',
+    current: '현재',
+    presets: '프리셋',
+    custom: '커스텀',
+    width: '가로',
+    height: '세로',
+    apply: '적용',
+  },
   canvas: {
     info: '32 x 32 픽셀',
   },

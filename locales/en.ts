@@ -23,6 +23,15 @@ export const en = {
     hex: 'HEX',
     presets: 'PRESETS',
   },
+  canvasSettings: {
+    title: 'CANVAS SIZE',
+    current: 'CURRENT',
+    presets: 'PRESETS',
+    custom: 'CUSTOM',
+    width: 'WIDTH',
+    height: 'HEIGHT',
+    apply: 'APPLY',
+  },
   canvas: {
     info: '32 x 32 PIXELS',
   },

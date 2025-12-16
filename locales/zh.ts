@@ -23,6 +23,15 @@ export const zh = {
     hex: 'HEX',
     presets: '预设',
   },
+  canvasSettings: {
+    title: '画布大小',
+    current: '当前',
+    presets: '预设',
+    custom: '自定义',
+    width: '宽度',
+    height: '高度',
+    apply: '应用',
+  },
   canvas: {
     info: '32 x 32 像素',
   },

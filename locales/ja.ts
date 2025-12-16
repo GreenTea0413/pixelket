@@ -23,6 +23,15 @@ export const ja = {
     hex: 'HEX',
     presets: 'プリセット',
   },
+  canvasSettings: {
+    title: 'キャンバスサイズ',
+    current: '現在',
+    presets: 'プリセット',
+    custom: 'カスタム',
+    width: '幅',
+    height: '高さ',
+    apply: '適用',
+  },
   canvas: {
     info: '32 x 32 ピクセル',
   },
