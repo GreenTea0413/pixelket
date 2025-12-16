@@ -1,23 +1,38 @@
 'use client';
 
 import { useCanvasStore } from '@/store/useCanvasStore';
+import { useLanguageStore } from '@/store/useLanguageStore';
 import type { Tool } from '@/types';
 
-const tools: { name: Tool; icon: string; label: string }[] = [
-  { name: 'pen', icon: '✏️', label: 'Pen' },
-  { name: 'eraser', icon: '🧹', label: 'Eraser' },
-  { name: 'fill', icon: '🪣', label: 'Fill' },
-  { name: 'eyedropper', icon: '💧', label: 'Eyedropper' },
+const tools: { name: Tool; icon: string }[] = [
+  { name: 'pen', icon: '✏️' },
+  { name: 'eraser', icon: '🧹' },
+  { name: 'fill', icon: '🪣' },
+  { name: 'eyedropper', icon: '💧' },
 ];
 
 export default function Toolbar() {
   const { currentTool, setTool, clearCanvas, undo, redo } = useCanvasStore();
+  const { t } = useLanguageStore();
+
+  const getToolLabel = (toolName: Tool) => {
+    switch (toolName) {
+      case 'pen':
+        return t.tools.pen;
+      case 'eraser':
+        return t.tools.eraser;
+      case 'fill':
+        return t.tools.fill;
+      case 'eyedropper':
+        return t.tools.eyedropper;
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4 p-4 bg-gray-800 border border-gray-700">
       {/* Tools */}
       <div className="flex flex-col gap-2">
-        <h3 className="text-xs font-pixel text-gray-400 mb-2">TOOLS</h3>
+        <h3 className="text-xs font-pixel text-gray-400 mb-2">{t.tools.title}</h3>
         {tools.map((tool) => (
           <button
             key={tool.name}
@@ -32,7 +47,7 @@ export default function Toolbar() {
             `}
           >
             <span className="text-base">{tool.icon}</span>
-            <span>{tool.label.toUpperCase()}</span>
+            <span>{getToolLabel(tool.name)}</span>
           </button>
         ))}
       </div>
@@ -42,24 +57,24 @@ export default function Toolbar() {
 
       {/* Actions */}
       <div className="flex flex-col gap-2">
-        <h3 className="text-xs font-pixel text-gray-400 mb-2">ACTIONS</h3>
+        <h3 className="text-xs font-pixel text-gray-400 mb-2">{t.actions.title}</h3>
         <button
           onClick={undo}
           className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-xs font-pixel text-gray-300 transition-colors"
         >
-          UNDO
+          {t.actions.undo}
         </button>
         <button
           onClick={redo}
           className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-xs font-pixel text-gray-300 transition-colors"
         >
-          REDO
+          {t.actions.redo}
         </button>
         <button
           onClick={clearCanvas}
           className="px-3 py-2 bg-red-900 hover:bg-red-800 text-xs font-pixel text-red-200 transition-colors"
         >
-          CLEAR
+          {t.actions.clear}
         </button>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { useCanvasStore } from '@/store/useCanvasStore';
+import { useLanguageStore } from '@/store/useLanguageStore';
 
 const presetColors = [
   '#000000', '#FFFFFF', '#FF0000', '#00FF00',
@@ -12,11 +13,12 @@ const presetColors = [
 
 export default function ColorPicker() {
   const { currentColor, setColor } = useCanvasStore();
+  const { t } = useLanguageStore();
   const [showPicker, setShowPicker] = useState(false);
 
   return (
     <div className="flex flex-col gap-4 p-4 bg-gray-800 border border-gray-700">
-      <h3 className="text-xs font-pixel text-gray-400">COLOR</h3>
+      <h3 className="text-xs font-pixel text-gray-400">{t.color.title}</h3>
 
       {/* Current Color */}
       <div className="flex items-center gap-3">
@@ -26,7 +28,7 @@ export default function ColorPicker() {
           onClick={() => setShowPicker(!showPicker)}
         />
         <div className="flex flex-col">
-          <span className="text-xs text-gray-500 font-pixel">HEX</span>
+          <span className="text-xs text-gray-500 font-pixel">{t.color.hex}</span>
           <span className="text-xs font-pixel text-gray-300">{currentColor}</span>
         </div>
       </div>
@@ -40,7 +42,7 @@ export default function ColorPicker() {
 
       {/* Preset Colors */}
       <div>
-        <h4 className="text-xs font-pixel text-gray-500 mb-2">PRESETS</h4>
+        <h4 className="text-xs font-pixel text-gray-500 mb-2">{t.color.presets}</h4>
         <div className="grid grid-cols-4 gap-2">
           {presetColors.map((color) => (
             <button

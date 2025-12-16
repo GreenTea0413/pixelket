@@ -1,8 +1,13 @@
+'use client';
+
 import Canvas from '@/components/Canvas';
 import Toolbar from '@/components/Toolbar';
 import ColorPicker from '@/components/ColorPicker';
+import LanguageSelector from '@/components/LanguageSelector';
+import { useLanguageStore } from '@/store/useLanguageStore';
 
 export default function Home() {
+  const { t } = useLanguageStore();
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Header */}
@@ -11,16 +16,17 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-pixel text-white tracking-wider">
-                PIXEORA
+                {t.header.title}
               </h1>
-              <p className="text-xs text-gray-400 mt-2">Pixel Art Editor</p>
+              <p className="text-xs text-gray-400 mt-2">{t.header.subtitle}</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
+              <LanguageSelector />
               <button className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-xs font-pixel transition-colors">
-                EXPORT
+                {t.header.export}
               </button>
               <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-pixel transition-colors">
-                SAVE
+                {t.header.save}
               </button>
             </div>
           </div>
@@ -43,7 +49,7 @@ export default function Home() {
 
             {/* Canvas Info */}
             <div className="mt-4 text-center text-xs text-gray-500 font-pixel">
-              <p>32 x 32 PIXELS</p>
+              <p>{t.canvas.info}</p>
             </div>
           </div>
 
@@ -56,7 +62,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-16 py-8 text-center text-xs text-gray-600 font-pixel">
-        <p>PIXEORA</p>
+        <p>{t.footer.text}</p>
       </footer>
     </div>
   );

@@ -1,0 +1,32 @@
+export const ko = {
+  header: {
+    title: 'PIXEORA',
+    subtitle: '픽셀 아트 에디터',
+    export: '내보내기',
+    save: '저장',
+  },
+  tools: {
+    title: '도구',
+    pen: '펜',
+    eraser: '지우개',
+    fill: '채우기',
+    eyedropper: '스포이트',
+  },
+  actions: {
+    title: '작업',
+    undo: '실행 취소',
+    redo: '다시 실행',
+    clear: '지우기',
+  },
+  color: {
+    title: '색상',
+    hex: 'HEX',
+    presets: '프리셋',
+  },
+  canvas: {
+    info: '32 x 32 픽셀',
+  },
+  footer: {
+    text: 'PIXEORA',
+  },
+};
