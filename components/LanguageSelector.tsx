@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguageStore } from '@/store/useLanguageStore';
 import type { Locale } from '@/locales';
 
@@ -41,7 +42,7 @@ export default function LanguageSelector() {
         className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-pixel transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
       >
         <span className="leading-none">언어: {currentLanguage?.name}</span>
-        <span className="text-xs leading-none">{isOpen ? '▲' : '▼'}</span>
+        {isOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </button>
 
       {isOpen && (
