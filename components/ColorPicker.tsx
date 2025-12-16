@@ -5,14 +5,8 @@ import { HexColorPicker } from 'react-colorful';
 import { useCanvasStore } from '@/store/useCanvasStore';
 import { useLanguageStore } from '@/store/useLanguageStore';
 
-const presetColors = [
-  '#000000', '#FFFFFF', '#FF0000', '#00FF00',
-  '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF',
-  '#FFA500', '#800080', '#FFC0CB', '#A52A2A',
-];
-
 export default function ColorPicker() {
-  const { currentColor, setColor } = useCanvasStore();
+  const { currentColor, setColor, savedColors, addColorToPalette, removeColorFromPalette } = useCanvasStore();
   const { t } = useLanguageStore();
   const [showPicker, setShowPicker] = useState(false);
 
@@ -40,27 +34,48 @@ export default function ColorPicker() {
         </div>
       )}
 
-      {/* Preset Colors */}
-      <div>
-        <h4 className="text-sm font-pixel text-gray-500 mb-2">{t.color.presets}</h4>
-        <div className="grid grid-cols-4 gap-2">
-          {presetColors.map((color) => (
-            <button
-              key={color}
-              onClick={() => setColor(color)}
-              className={`
-                w-10 h-10 border-2 transition-all
-                ${
-                  currentColor === color
-                    ? 'border-green-500 scale-110'
-                    : 'border-gray-600 hover:scale-105'
-                }
-              `}
-              style={{ backgroundColor: color }}
-            />
-          ))}
+      {/* Add to Palette Button */}
+      <button
+        onClick={() => addColorToPalette(currentColor)}
+        className="px-3 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-pixel transition-colors flex items-center justify-center"
+        disabled={savedColors.includes(currentColor) || savedColors.length >= 20}
+      >
+        {savedColors.includes(currentColor) ? '저장됨' : '팔레트에 추가'}
+      </button>
+
+      {/* Saved Colors */}
+      {savedColors.length > 0 && (
+        <div>
+          <h4 className="text-sm font-pixel text-gray-500 mb-2">내 팔레트</h4>
+          <div className="grid grid-cols-4 gap-2">
+            {savedColors.map((color) => (
+              <div key={color} className="relative group">
+                <button
+                  onClick={() => setColor(color)}
+                  className={`
+                    w-10 h-10 border-2 transition-all
+                    ${
+                      currentColor === color
+                        ? 'border-green-500 scale-110'
+                        : 'border-gray-600 hover:scale-105'
+                    }
+                  `}
+                  style={{ backgroundColor: color }}
+                />
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeColorFromPalette(color);
+                  }}
+                  className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white text-xs rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -38,10 +38,10 @@ export default function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-pixel transition-colors flex items-center justify-center gap-2"
+        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-pixel transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
       >
-        <span>언어: {currentLanguage?.name}</span>
-        <span className="text-xs">{isOpen ? '▲' : '▼'}</span>
+        <span className="leading-none">언어: {currentLanguage?.name}</span>
+        <span className="text-xs leading-none">{isOpen ? '▲' : '▼'}</span>
       </button>
 
       {isOpen && (
@@ -51,7 +51,7 @@ export default function LanguageSelector() {
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               className={`
-                w-full px-4 py-2 text-sm font-pixel text-left transition-colors
+                w-full px-4 py-2 text-sm font-pixel text-left transition-colors whitespace-nowrap
                 ${
                   locale === lang.code
                     ? 'bg-green-600 text-white'

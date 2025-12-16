@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import type { Canvas, Tool, HistoryState } from '@/types';
 
 interface CanvasStore {
@@ -12,6 +13,9 @@ interface CanvasStore {
   currentTool: Tool;
   currentColor: string;
 
+  // Custom color palette
+  savedColors: string[];
+
   // History (Undo/Redo)
   history: HistoryState[];
   historyIndex: number;
@@ -22,6 +26,8 @@ interface CanvasStore {
   setTool: (tool: Tool) => void;
   setColor: (color: string) => void;
   setCanvasSize: (width: number, height: number) => void;
+  addColorToPalette: (color: string) => void;
+  removeColorFromPalette: (color: string) => void;
   undo: () => void;
   redo: () => void;
   initCanvas: (width: number, height: number) => void;
@@ -33,16 +39,19 @@ const createEmptyCanvas = (width: number, height: number): Canvas => {
   );
 };
 
-export const useCanvasStore = create<CanvasStore>((set, get) => ({
-  // Initial state
-  canvas: createEmptyCanvas(32, 32),
-  canvasWidth: 32,
-  canvasHeight: 32,
-  pixelSize: 16,
-  currentTool: 'pen',
-  currentColor: '#000000',
-  history: [],
-  historyIndex: -1,
+export const useCanvasStore = create<CanvasStore>()(
+  persist(
+    (set, get) => ({
+      // Initial state
+      canvas: createEmptyCanvas(32, 32),
+      canvasWidth: 32,
+      canvasHeight: 32,
+      pixelSize: 16,
+      currentTool: 'pen',
+      currentColor: '#000000',
+      savedColors: [],
+      history: [],
+      historyIndex: -1,
 
   // Initialize canvas
   initCanvas: (width: number, height: number) => {
@@ -100,6 +109,20 @@ export const useCanvasStore = create<CanvasStore>((set, get) => ({
   // Set color
   setColor: (color: string) => set({ currentColor: color }),
 
+  // Add color to palette
+  addColorToPalette: (color: string) => {
+    const { savedColors } = get();
+    if (!savedColors.includes(color) && savedColors.length < 20) {
+      set({ savedColors: [...savedColors, color] });
+    }
+  },
+
+  // Remove color from palette
+  removeColorFromPalette: (color: string) => {
+    const { savedColors } = get();
+    set({ savedColors: savedColors.filter((c) => c !== color) });
+  },
+
   // Set canvas size
   setCanvasSize: (width: number, height: number) => {
     const newCanvas = createEmptyCanvas(width, height);
@@ -135,4 +158,10 @@ export const useCanvasStore = create<CanvasStore>((set, get) => ({
       });
     }
   },
-}));
+    }),
+    {
+      name: 'pixeora-canvas',
+      partialize: (state) => ({ savedColors: state.savedColors }),
+    }
+  )
+);
