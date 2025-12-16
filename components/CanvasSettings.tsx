@@ -46,13 +46,13 @@ export default function CanvasSettings() {
       {/* Preset Sizes */}
       <div>
         <h4 className="text-xs font-pixel text-gray-500 mb-1.5">프리셋</h4>
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="flex flex-col gap-1.5">
           {presetSizes.map((size) => (
             <button
               key={size}
               onClick={() => handlePresetSize(size)}
               className={`
-                px-1.5 py-1.5 text-xs font-pixel transition-colors flex items-center justify-center
+                w-full px-2 py-1.5 text-xs font-pixel transition-colors flex items-center justify-center
                 ${
                   canvasWidth === size && canvasHeight === size
                     ? 'bg-green-600 text-white'
@@ -60,7 +60,7 @@ export default function CanvasSettings() {
                 }
               `}
             >
-              {size}×{size}
+              {size} × {size}
             </button>
           ))}
         </div>
