@@ -15,19 +15,19 @@ export default function ColorPicker() {
   const [showPicker, setShowPicker] = useState(false);
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-white border-2 border-gray-300 rounded-lg shadow-lg">
-      <h3 className="text-sm font-semibold text-gray-700">Color</h3>
+    <div className="flex flex-col gap-4 p-4 bg-gray-800 border border-gray-700">
+      <h3 className="text-xs font-pixel text-gray-400">COLOR</h3>
 
       {/* Current Color */}
       <div className="flex items-center gap-3">
         <div
-          className="w-16 h-16 rounded-lg border-2 border-gray-300 cursor-pointer shadow-md"
+          className="w-16 h-16 border-2 border-gray-600 cursor-pointer"
           style={{ backgroundColor: currentColor }}
           onClick={() => setShowPicker(!showPicker)}
         />
         <div className="flex flex-col">
-          <span className="text-xs text-gray-500">Current</span>
-          <span className="text-sm font-mono font-semibold">{currentColor}</span>
+          <span className="text-xs text-gray-500 font-pixel">HEX</span>
+          <span className="text-xs font-pixel text-gray-300">{currentColor}</span>
         </div>
       </div>
 
@@ -40,18 +40,18 @@ export default function ColorPicker() {
 
       {/* Preset Colors */}
       <div>
-        <h4 className="text-xs font-semibold text-gray-600 mb-2">Presets</h4>
+        <h4 className="text-xs font-pixel text-gray-500 mb-2">PRESETS</h4>
         <div className="grid grid-cols-4 gap-2">
           {presetColors.map((color) => (
             <button
               key={color}
               onClick={() => setColor(color)}
               className={`
-                w-10 h-10 rounded-md border-2 transition-all
+                w-10 h-10 border-2 transition-all
                 ${
                   currentColor === color
-                    ? 'border-blue-500 scale-110 shadow-md'
-                    : 'border-gray-300 hover:scale-105'
+                    ? 'border-green-500 scale-110'
+                    : 'border-gray-600 hover:scale-105'
                 }
               `}
               style={{ backgroundColor: color }}

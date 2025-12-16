@@ -4,23 +4,23 @@ import ColorPicker from '@/components/ColorPicker';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
+    <div className="min-h-screen bg-gray-900">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm">
+      <header className="bg-gray-800 border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                Pixeora
+              <h1 className="text-2xl font-pixel text-white tracking-wider">
+                PIXEORA
               </h1>
-              <p className="text-sm text-gray-600 mt-1">Free Pixel Art Editor</p>
+              <p className="text-xs text-gray-400 mt-2">Pixel Art Editor</p>
             </div>
             <div className="flex gap-2">
-              <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors">
-                Export PNG
+              <button className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-xs font-pixel transition-colors">
+                EXPORT
               </button>
-              <button className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm font-medium transition-colors">
-                Save
+              <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-pixel transition-colors">
+                SAVE
               </button>
             </div>
           </div>
@@ -37,13 +37,13 @@ export default function Home() {
 
           {/* Center - Canvas */}
           <div className="flex flex-col items-center">
-            <div className="bg-white rounded-lg shadow-xl p-4">
+            <div className="bg-gray-800 rounded-lg border border-gray-700 p-4">
               <Canvas />
             </div>
 
             {/* Canvas Info */}
-            <div className="mt-4 text-center text-sm text-gray-600">
-              <p>32 × 32 pixels | Click and drag to draw</p>
+            <div className="mt-4 text-center text-xs text-gray-500 font-pixel">
+              <p>32 x 32 PIXELS</p>
             </div>
           </div>
 
@@ -55,8 +55,8 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 py-8 text-center text-sm text-gray-500">
-        <p>Made with ❤️ by Pixeora | Free Pixel Art Editor</p>
+      <footer className="mt-16 py-8 text-center text-xs text-gray-600 font-pixel">
+        <p>PIXEORA</p>
       </footer>
     </div>
   );
