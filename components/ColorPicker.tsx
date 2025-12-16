@@ -11,25 +11,25 @@ export default function ColorPicker() {
   const [showPicker, setShowPicker] = useState(false);
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-gray-800 border border-gray-700">
-      <h3 className="text-sm font-pixel text-gray-400">{t.color.title}</h3>
+    <div className="flex flex-col gap-3 p-3 bg-gray-800 border border-gray-700">
+      <h3 className="text-xs font-pixel text-gray-400">{t.color.title}</h3>
 
       {/* Current Color */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <div
-          className="w-16 h-16 border-2 border-gray-600 cursor-pointer"
+          className="w-12 h-12 border-2 border-gray-600 cursor-pointer"
           style={{ backgroundColor: currentColor }}
           onClick={() => setShowPicker(!showPicker)}
         />
         <div className="flex flex-col">
-          <span className="text-sm text-gray-500 font-pixel">{t.color.hex}</span>
-          <span className="text-sm font-pixel text-gray-300">{currentColor}</span>
+          <span className="text-xs text-gray-500 font-pixel">{t.color.hex}</span>
+          <span className="text-xs font-pixel text-gray-300">{currentColor}</span>
         </div>
       </div>
 
       {/* Color Picker */}
       {showPicker && (
-        <div className="mt-2">
+        <div className="mt-1">
           <HexColorPicker color={currentColor} onChange={setColor} />
         </div>
       )}
@@ -37,7 +37,7 @@ export default function ColorPicker() {
       {/* Add to Palette Button */}
       <button
         onClick={() => addColorToPalette(currentColor)}
-        className="px-3 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-pixel transition-colors flex items-center justify-center"
+        className="px-2 py-1.5 bg-green-600 hover:bg-green-500 text-white text-xs font-pixel transition-colors flex items-center justify-center"
         disabled={savedColors.includes(currentColor) || savedColors.length >= 20}
       >
         {savedColors.includes(currentColor) ? '저장됨' : '팔레트에 추가'}
@@ -46,7 +46,7 @@ export default function ColorPicker() {
       {/* Saved Colors */}
       {savedColors.length > 0 && (
         <div>
-          <h4 className="text-sm font-pixel text-gray-500 mb-2">내 팔레트</h4>
+          <h4 className="text-xs font-pixel text-gray-500 mb-2">내 팔레트</h4>
           <div className="grid grid-cols-4 gap-2">
             {savedColors.map((color) => (
               <div key={color} className="relative group">

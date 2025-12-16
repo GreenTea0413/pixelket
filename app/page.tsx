@@ -19,14 +19,14 @@ export default function Home() {
               <h1 className="text-2xl font-pixel text-white tracking-wider">
                 {t.header.title}
               </h1>
-              <p className="text-sm text-gray-400 mt-2">{t.header.subtitle}</p>
+              <p className="text-xs text-gray-400 mt-2">{t.header.subtitle}</p>
             </div>
             <div className="flex gap-2 items-center">
               <LanguageSelector />
-              <button className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-pixel transition-colors flex items-center justify-center">
+              <button className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-xs font-pixel transition-colors flex items-center justify-center">
                 {t.header.export}
               </button>
-              <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-pixel transition-colors flex items-center justify-center">
+              <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-pixel transition-colors flex items-center justify-center">
                 {t.header.save}
               </button>
             </div>
@@ -36,7 +36,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr_280px] gap-6">
           {/* Left Sidebar - Tools */}
           <div className="lg:sticky lg:top-8 lg:self-start space-y-6">
             <Toolbar />
@@ -50,7 +50,7 @@ export default function Home() {
             </div>
 
             {/* Canvas Info */}
-            <div className="mt-4 text-center text-sm text-gray-500 font-pixel">
+            <div className="mt-4 text-center text-xs text-gray-500 font-pixel">
               <p>{t.canvas.info}</p>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 py-8 text-center text-sm text-gray-600 font-pixel">
+      <footer className="mt-16 py-8 text-center text-xs text-gray-600 font-pixel">
         <p>{t.footer.text}</p>
       </footer>
     </div>

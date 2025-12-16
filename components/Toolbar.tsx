@@ -29,16 +29,16 @@ export default function Toolbar() {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-gray-800 border border-gray-700">
+    <div className="flex flex-col gap-3 p-3 bg-gray-800 border border-gray-700">
       {/* Tools */}
-      <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-pixel text-gray-400 mb-2">{t.tools.title}</h3>
+      <div className="flex flex-col gap-1.5">
+        <h3 className="text-xs font-pixel text-gray-400 mb-1">{t.tools.title}</h3>
         {tools.map((tool) => (
           <button
             key={tool.name}
             onClick={() => setTool(tool.name)}
             className={`
-              flex items-center justify-center gap-2 px-3 py-2 transition-all text-sm font-pixel
+              flex items-center justify-center gap-1.5 px-2 py-1.5 transition-all text-xs font-pixel
               ${
                 currentTool === tool.name
                   ? 'bg-green-600 text-white'
@@ -46,7 +46,7 @@ export default function Toolbar() {
               }
             `}
           >
-            <span className="text-lg">{tool.icon}</span>
+            <span className="text-base">{tool.icon}</span>
             <span>{getToolLabel(tool.name)}</span>
           </button>
         ))}
@@ -56,23 +56,23 @@ export default function Toolbar() {
       <div className="border-t border-gray-700" />
 
       {/* Actions */}
-      <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-pixel text-gray-400 mb-2">{t.actions.title}</h3>
+      <div className="flex flex-col gap-1.5">
+        <h3 className="text-xs font-pixel text-gray-400 mb-1">{t.actions.title}</h3>
         <button
           onClick={undo}
-          className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 text-sm font-pixel transition-colors flex items-center justify-center"
+          className="px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs font-pixel transition-colors flex items-center justify-center"
         >
           {t.actions.undo}
         </button>
         <button
           onClick={redo}
-          className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 text-sm font-pixel transition-colors flex items-center justify-center"
+          className="px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs font-pixel transition-colors flex items-center justify-center"
         >
           {t.actions.redo}
         </button>
         <button
           onClick={clearCanvas}
-          className="px-3 py-2 bg-red-900 hover:bg-red-800 text-red-200 text-sm font-pixel transition-colors flex items-center justify-center"
+          className="px-2 py-1.5 bg-red-900 hover:bg-red-800 text-red-200 text-xs font-pixel transition-colors flex items-center justify-center"
         >
           {t.actions.clear}
         </button>
