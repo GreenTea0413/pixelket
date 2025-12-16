@@ -36,7 +36,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr_280px] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr_240px] gap-4">
           {/* Left Sidebar - Tools */}
           <div className="lg:sticky lg:top-8 lg:self-start space-y-6">
             <Toolbar />
