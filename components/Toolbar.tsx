@@ -2,13 +2,14 @@
 
 import { useCanvasStore } from '@/store/useCanvasStore';
 import { useLanguageStore } from '@/store/useLanguageStore';
+import { Pencil, Eraser, PaintBucket, Pipette, Undo, Redo, Trash2 } from 'lucide-react';
 import type { Tool } from '@/types';
 
-const tools: { name: Tool; icon: string }[] = [
-  { name: 'pen', icon: '✏️' },
-  { name: 'eraser', icon: '🧹' },
-  { name: 'fill', icon: '🪣' },
-  { name: 'eyedropper', icon: '💧' },
+const tools: { name: Tool; icon: React.ComponentType<{ size?: number }> }[] = [
+  { name: 'pen', icon: Pencil },
+  { name: 'eraser', icon: Eraser },
+  { name: 'fill', icon: PaintBucket },
+  { name: 'eyedropper', icon: Pipette },
 ];
 
 export default function Toolbar() {
@@ -29,52 +30,58 @@ export default function Toolbar() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-3 bg-gray-800 border border-gray-700">
+    <div className="flex flex-col gap-3 p-3 bg-neutral-900 border border-neutral-700">
       {/* Tools */}
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-xs font-pixel text-gray-400 mb-1">{t.tools.title}</h3>
-        {tools.map((tool) => (
-          <button
-            key={tool.name}
-            onClick={() => setTool(tool.name)}
-            className={`
-              flex items-center justify-center gap-1.5 px-2 py-1.5 transition-all text-xs font-pixel
-              ${
-                currentTool === tool.name
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
-              }
-            `}
-          >
-            <span className="text-base">{tool.icon}</span>
-            <span>{getToolLabel(tool.name)}</span>
-          </button>
-        ))}
+        <h3 className="text-xs font-pixel text-neutral-400 mb-1">{t.tools.title}</h3>
+        {tools.map((tool) => {
+          const Icon = tool.icon;
+          return (
+            <button
+              key={tool.name}
+              onClick={() => setTool(tool.name)}
+              className={`
+                flex items-center justify-center gap-1.5 px-2 py-1.5 transition-all text-xs font-pixel
+                ${
+                  currentTool === tool.name
+                    ? 'bg-green-600 text-white'
+                    : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300'
+                }
+              `}
+            >
+              <Icon size={16} />
+              <span>{getToolLabel(tool.name)}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700" />
+      <div className="border-t border-neutral-700" />
 
       {/* Actions */}
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-xs font-pixel text-gray-400 mb-1">{t.actions.title}</h3>
+        <h3 className="text-xs font-pixel text-neutral-400 mb-1">{t.actions.title}</h3>
         <button
           onClick={undo}
-          className="px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs font-pixel transition-colors flex items-center justify-center"
+          className="px-2 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-pixel transition-colors flex items-center justify-center gap-1.5"
         >
-          {t.actions.undo}
+          <Undo size={16} />
+          <span>{t.actions.undo}</span>
         </button>
         <button
           onClick={redo}
-          className="px-2 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs font-pixel transition-colors flex items-center justify-center"
+          className="px-2 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-pixel transition-colors flex items-center justify-center gap-1.5"
         >
-          {t.actions.redo}
+          <Redo size={16} />
+          <span>{t.actions.redo}</span>
         </button>
         <button
           onClick={clearCanvas}
-          className="px-2 py-1.5 bg-red-900 hover:bg-red-800 text-red-200 text-xs font-pixel transition-colors flex items-center justify-center"
+          className="px-2 py-1.5 bg-red-900 hover:bg-red-800 text-red-200 text-xs font-pixel transition-colors flex items-center justify-center gap-1.5"
         >
-          {t.actions.clear}
+          <Trash2 size={16} />
+          <span>{t.actions.clear}</span>
         </button>
       </div>
     </div>

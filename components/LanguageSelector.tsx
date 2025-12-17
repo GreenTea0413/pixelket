@@ -39,14 +39,14 @@ export default function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs font-pixel transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
+        className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-pixel transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
       >
         <span className="leading-none">언어: {currentLanguage?.name}</span>
         {isOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
       </button>
 
       {isOpen && (
-        <div className="absolute top-full mt-1 left-0 bg-gray-700 border border-gray-600 min-w-full z-50">
+        <div className="absolute top-full mt-1 left-0 bg-neutral-800 border border-neutral-600 min-w-full z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -56,7 +56,7 @@ export default function LanguageSelector() {
                 ${
                   locale === lang.code
                     ? 'bg-green-600 text-white'
-                    : 'text-gray-300 hover:bg-gray-600'
+                    : 'text-neutral-300 hover:bg-neutral-700'
                 }
               `}
             >

@@ -23,6 +23,11 @@ export const zh = {
     hex: 'HEX',
     presets: '预设',
   },
+  help: {
+    title: '帮助',
+    zoom: 'Ctrl/Cmd + 滚轮: 缩放',
+    pan: 'Shift + 拖动: 平移',
+  },
   canvasSettings: {
     title: '画布大小',
     current: '当前',
@@ -31,9 +36,6 @@ export const zh = {
     width: '宽度',
     height: '高度',
     apply: '应用',
-  },
-  canvas: {
-    info: '32 x 32 像素',
   },
   footer: {
     text: 'PIXEORA',

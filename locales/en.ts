@@ -23,6 +23,11 @@ export const en = {
     hex: 'HEX',
     presets: 'PRESETS',
   },
+  help: {
+    title: 'HELP',
+    zoom: 'Ctrl/Cmd + Wheel: Zoom',
+    pan: 'Shift + Drag: Pan',
+  },
   canvasSettings: {
     title: 'CANVAS SIZE',
     current: 'CURRENT',
@@ -31,9 +36,6 @@ export const en = {
     width: 'WIDTH',
     height: 'HEIGHT',
     apply: 'APPLY',
-  },
-  canvas: {
-    info: '32 x 32 PIXELS',
   },
   footer: {
     text: 'PIXEORA',

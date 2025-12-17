@@ -9,6 +9,11 @@ interface CanvasStore {
   canvasHeight: number;
   pixelSize: number;
 
+  // Zoom and Pan state
+  zoom: number;
+  panX: number;
+  panY: number;
+
   // Tool state
   currentTool: Tool;
   currentColor: string;
@@ -31,6 +36,9 @@ interface CanvasStore {
   undo: () => void;
   redo: () => void;
   initCanvas: (width: number, height: number) => void;
+  setZoom: (zoom: number) => void;
+  setPan: (panX: number, panY: number) => void;
+  resetView: () => void;
 }
 
 const createEmptyCanvas = (width: number, height: number): Canvas => {
@@ -47,6 +55,9 @@ export const useCanvasStore = create<CanvasStore>()(
       canvasWidth: 32,
       canvasHeight: 32,
       pixelSize: 16,
+      zoom: 1,
+      panX: 0,
+      panY: 0,
       currentTool: 'pen',
       currentColor: '#000000',
       savedColors: [],
@@ -56,7 +67,7 @@ export const useCanvasStore = create<CanvasStore>()(
   // Initialize canvas
   initCanvas: (width: number, height: number) => {
     const newCanvas = createEmptyCanvas(width, height);
-    const maxDisplaySize = 512;
+    const maxDisplaySize = 800;
     const maxDimension = Math.max(width, height);
     const newPixelSize = Math.max(1, Math.floor(maxDisplaySize / maxDimension));
 
@@ -131,8 +142,8 @@ export const useCanvasStore = create<CanvasStore>()(
   // Set canvas size
   setCanvasSize: (width: number, height: number) => {
     const newCanvas = createEmptyCanvas(width, height);
-    // 최대 표시 크기를 512px로 유지하고 픽셀 크기 자동 조정
-    const maxDisplaySize = 512;
+    // 최대 표시 크기를 800px로 유지하고 픽셀 크기 자동 조정
+    const maxDisplaySize = 800;
     const maxDimension = Math.max(width, height);
     const newPixelSize = Math.max(1, Math.floor(maxDisplaySize / maxDimension));
 
@@ -168,6 +179,21 @@ export const useCanvasStore = create<CanvasStore>()(
         historyIndex: newIndex,
       });
     }
+  },
+
+  // Set zoom level
+  setZoom: (zoom: number) => {
+    set({ zoom: Math.max(0.1, Math.min(10, zoom)) });
+  },
+
+  // Set pan offset
+  setPan: (panX: number, panY: number) => {
+    set({ panX, panY });
+  },
+
+  // Reset view
+  resetView: () => {
+    set({ zoom: 1, panX: 0, panY: 0 });
   },
     }),
     {

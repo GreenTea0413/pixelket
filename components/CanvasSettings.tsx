@@ -35,17 +35,17 @@ export default function CanvasSettings() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-3 bg-gray-800 border border-gray-700">
-      <h3 className="text-xs font-pixel text-gray-400">캔버스 크기</h3>
+    <div className="flex flex-col gap-3 p-3 bg-neutral-900 border border-neutral-700">
+      <h3 className="text-xs font-pixel text-neutral-400">캔버스 크기</h3>
 
       {/* Current Size */}
-      <div className="text-xs font-pixel text-gray-300">
+      <div className="text-xs font-pixel text-neutral-300">
         현재: {canvasWidth} × {canvasHeight}
       </div>
 
       {/* Preset Sizes */}
       <div>
-        <h4 className="text-xs font-pixel text-gray-500 mb-1.5">프리셋</h4>
+        <h4 className="text-xs font-pixel text-neutral-500 mb-1.5">프리셋</h4>
         <div className="flex flex-col gap-1.5">
           {presetSizes.map((size) => (
             <button
@@ -56,7 +56,7 @@ export default function CanvasSettings() {
                 ${
                   canvasWidth === size && canvasHeight === size
                     ? 'bg-green-600 text-white'
-                    : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                    : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300'
                 }
               `}
             >
@@ -68,24 +68,24 @@ export default function CanvasSettings() {
 
       {/* Custom Size */}
       <div>
-        <h4 className="text-xs font-pixel text-gray-500 mb-1.5">커스텀</h4>
+        <h4 className="text-xs font-pixel text-neutral-500 mb-1.5">커스텀</h4>
         <div className="flex gap-1.5">
           <input
             type="number"
             value={customWidth}
             onChange={(e) => setCustomWidth(e.target.value)}
             placeholder="가로"
-            className="w-full px-1.5 py-1 bg-gray-700 text-gray-200 text-xs font-pixel border border-gray-600 focus:border-green-500 focus:outline-none"
+            className="w-full px-1.5 py-1 bg-neutral-800 text-neutral-200 text-xs font-pixel border border-neutral-600 focus:border-green-500 focus:outline-none"
             min="8"
             max="1024"
           />
-          <span className="text-gray-500 font-pixel text-xs flex items-center">×</span>
+          <span className="text-neutral-500 font-pixel text-xs flex items-center">×</span>
           <input
             type="number"
             value={customHeight}
             onChange={(e) => setCustomHeight(e.target.value)}
             placeholder="세로"
-            className="w-full px-1.5 py-1 bg-gray-700 text-gray-200 text-xs font-pixel border border-gray-600 focus:border-green-500 focus:outline-none"
+            className="w-full px-1.5 py-1 bg-neutral-800 text-neutral-200 text-xs font-pixel border border-neutral-600 focus:border-green-500 focus:outline-none"
             min="8"
             max="1024"
           />

@@ -23,6 +23,11 @@ export const ja = {
     hex: 'HEX',
     presets: 'プリセット',
   },
+  help: {
+    title: 'ヘルプ',
+    zoom: 'Ctrl/Cmd + ホイール: ズーム',
+    pan: 'Shift + ドラッグ: パン',
+  },
   canvasSettings: {
     title: 'キャンバスサイズ',
     current: '現在',
@@ -31,9 +36,6 @@ export const ja = {
     width: '幅',
     height: '高さ',
     apply: '適用',
-  },
-  canvas: {
-    info: '32 x 32 ピクセル',
   },
   footer: {
     text: 'PIXEORA',

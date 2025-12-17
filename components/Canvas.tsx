@@ -5,17 +5,25 @@ import { useCanvasStore } from '@/store/useCanvasStore';
 
 export default function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
+  const [isPanning, setIsPanning] = useState(false);
+  const [lastPanPoint, setLastPanPoint] = useState({ x: 0, y: 0 });
 
   const {
     canvas,
     canvasWidth,
     canvasHeight,
     pixelSize,
+    zoom,
+    panX,
+    panY,
     currentTool,
     currentColor,
     setPixel,
     initCanvas,
+    setZoom,
+    setPan,
   } = useCanvasStore();
 
   // Initialize canvas on mount
@@ -63,28 +71,61 @@ export default function Canvas() {
     });
   }, [canvas, canvasWidth, canvasHeight, pixelSize]);
 
-  // Handle mouse events
+  // Get pixel coordinates with zoom adjustment
   const getPixelCoordinates = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvasElement = canvasRef.current;
     if (!canvasElement) return null;
 
     const rect = canvasElement.getBoundingClientRect();
-    const x = Math.floor((e.clientX - rect.left) / pixelSize);
-    const y = Math.floor((e.clientY - rect.top) / pixelSize);
+    // Adjust for zoom
+    const x = Math.floor((e.clientX - rect.left) / (pixelSize * zoom));
+    const y = Math.floor((e.clientY - rect.top) / (pixelSize * zoom));
 
     return { x, y };
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    setIsDrawing(true);
-    const coords = getPixelCoordinates(e);
-    if (coords) {
-      const color = currentTool === 'eraser' ? 'transparent' : currentColor;
-      setPixel(coords.x, coords.y, color);
+  // Handle zoom with Ctrl/Cmd + mouse wheel
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    // Only zoom when Ctrl or Cmd is pressed
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 0.9 : 1.1;
+      const newZoom = zoom * delta;
+      setZoom(newZoom);
     }
   };
 
+  // Handle mouse down
+  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    // Middle mouse button or Shift + left mouse button for panning
+    if (e.button === 1 || (e.button === 0 && e.shiftKey)) {
+      e.preventDefault();
+      setIsPanning(true);
+      setLastPanPoint({ x: e.clientX, y: e.clientY });
+      return;
+    }
+
+    // Normal drawing
+    if (e.button === 0 && !isPanning) {
+      setIsDrawing(true);
+      const coords = getPixelCoordinates(e);
+      if (coords) {
+        const color = currentTool === 'eraser' ? 'transparent' : currentColor;
+        setPixel(coords.x, coords.y, color);
+      }
+    }
+  };
+
+  // Handle mouse move
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (isPanning) {
+      const deltaX = e.clientX - lastPanPoint.x;
+      const deltaY = e.clientY - lastPanPoint.y;
+      setPan(panX + deltaX, panY + deltaY);
+      setLastPanPoint({ x: e.clientX, y: e.clientY });
+      return;
+    }
+
     if (!isDrawing) return;
 
     const coords = getPixelCoordinates(e);
@@ -94,26 +135,52 @@ export default function Canvas() {
     }
   };
 
+  // Handle mouse up
   const handleMouseUp = () => {
     setIsDrawing(false);
+    setIsPanning(false);
   };
 
+  // Handle mouse leave
   const handleMouseLeave = () => {
     setIsDrawing(false);
+    setIsPanning(false);
   };
 
+
   return (
-    <div className="flex items-center justify-center p-8">
-      <canvas
-        ref={canvasRef}
-        width={canvasWidth * pixelSize}
-        height={canvasHeight * pixelSize}
-        className="border-2 border-gray-300 cursor-crosshair shadow-lg"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-      />
+    <div
+      ref={containerRef}
+      className="relative overflow-auto bg-neutral-800 rounded"
+      style={{ maxWidth: '1400px', maxHeight: '900px', width: '100%', height: '700px' }}
+      onWheel={handleWheel}
+    >
+      <div
+        className="flex items-center justify-center p-8"
+        style={{
+          transform: `translate(${panX}px, ${panY}px)`,
+          minWidth: '100%',
+          minHeight: '100%',
+        }}
+      >
+        <canvas
+          ref={canvasRef}
+          width={canvasWidth * pixelSize}
+          height={canvasHeight * pixelSize}
+          className="border-2 border-neutral-300 shadow-lg bg-white"
+          style={{
+            transform: `scale(${zoom})`,
+            transformOrigin: 'center',
+            cursor: isPanning ? 'grabbing' : 'crosshair',
+            imageRendering: 'pixelated',
+          }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onContextMenu={(e) => e.preventDefault()}
+        />
+      </div>
     </div>
   );
 }
