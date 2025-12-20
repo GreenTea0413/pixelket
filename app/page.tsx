@@ -25,62 +25,48 @@ export default function Home() {
     loadProject(project);
   };
 
-  // Keyboard shortcuts
+  // Keyboard shortcuts (using e.code for Korean keyboard support)
   useEffect(() => {
-    console.log('🎹 Keyboard shortcuts initialized');
-
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log('🔑 Key pressed:', e.key);
-
       // Ignore if typing in input or textarea
       const target = e.target as HTMLElement;
       if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
-        console.log('❌ Ignored: input/textarea');
         return;
       }
 
       // Ignore if any modal is open
       if (isSaveModalOpen || isProjectsModalOpen || isExportModalOpen) {
-        console.log('❌ Ignored: modal is open');
         return;
       }
 
       // Ignore if Ctrl/Cmd/Alt is pressed (to avoid conflicts with browser shortcuts)
       if (e.ctrlKey || e.metaKey || e.altKey) {
-        console.log('❌ Ignored: modifier key pressed');
         return;
       }
 
-      const key = e.key.toLowerCase();
-
-      switch (key) {
-        case 'q':
-          console.log('✅ Pen tool selected');
+      // Use e.code instead of e.key for Korean keyboard support
+      switch (e.code) {
+        case 'KeyQ':
           setTool('pen');
           e.preventDefault();
           break;
-        case 'w':
-          console.log('✅ Eraser tool selected');
+        case 'KeyW':
           setTool('eraser');
           e.preventDefault();
           break;
-        case 'e':
-          console.log('✅ Fill tool selected');
+        case 'KeyE':
           setTool('fill');
           e.preventDefault();
           break;
-        case 'r':
-          console.log('✅ Eyedropper tool selected');
+        case 'KeyR':
           setTool('eyedropper');
           e.preventDefault();
           break;
-        case 'a':
-          console.log('✅ Undo');
+        case 'KeyA':
           undo();
           e.preventDefault();
           break;
-        case 's':
-          console.log('✅ Redo');
+        case 'KeyS':
           redo();
           e.preventDefault();
           break;
@@ -88,12 +74,7 @@ export default function Home() {
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    console.log('✅ Keyboard event listener added');
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      console.log('🗑️ Keyboard event listener removed');
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [setTool, undo, redo, isSaveModalOpen, isProjectsModalOpen, isExportModalOpen]);
 
   return (
