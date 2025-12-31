@@ -221,18 +221,24 @@ export default function Canvas() {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="relative overflow-auto bg-neutral-800 rounded"
-      style={{
-        maxWidth: `${containerSize.width}px`,
-        maxHeight: `${containerSize.height}px`,
-        width: '100%',
-        height: `${containerSize.height}px`
-      }}
-      onWheel={handleWheel}
-      onContextMenu={handleContextMenu}
-    >
+    <div className="relative">
+      {/* 디버깅 정보 */}
+      <div className="absolute top-0 left-0 bg-red-600 text-white text-xs px-2 py-1 z-50 font-mono">
+        Width: {currentWidth}px | Container: {containerSize.width}x{containerSize.height}
+      </div>
+
+      <div
+        ref={containerRef}
+        className="relative overflow-auto bg-neutral-800 rounded"
+        style={{
+          maxWidth: `${containerSize.width}px`,
+          maxHeight: `${containerSize.height}px`,
+          width: '100%',
+          height: `${containerSize.height}px`
+        }}
+        onWheel={handleWheel}
+        onContextMenu={handleContextMenu}
+      >
       <div
         className="flex items-center justify-center p-8"
         style={{
@@ -260,6 +266,7 @@ export default function Canvas() {
           onContextMenu={handleContextMenu}
         />
       </div>
+    </div>
     </div>
   );
 }
