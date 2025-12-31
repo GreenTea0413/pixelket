@@ -55,7 +55,7 @@ export default function ShortcutsGuide() {
         <div className="flex items-center gap-2 text-neutral-300">
           <span className="text-xs font-pixel">확대/축소</span>
           <kbd className="px-2 py-0.5 bg-neutral-800 border border-neutral-600 rounded text-[10px] font-pixel text-neutral-400">
-            Alt + 휠
+            Alt/Cmd + 휠
           </kbd>
         </div>
       </div>

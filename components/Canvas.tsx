@@ -110,10 +110,10 @@ export default function Canvas() {
     return { x, y };
   };
 
-  // Handle zoom with Alt + mouse wheel
+  // Handle zoom with Alt + mouse wheel (or Cmd on Mac)
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    // Only zoom when Alt is pressed
-    if (e.altKey) {
+    // Only zoom when Alt or Cmd (metaKey) is pressed
+    if (e.altKey || e.metaKey) {
       e.preventDefault();
       const delta = e.deltaY > 0 ? 0.9 : 1.1;
       const newZoom = zoom * delta;
