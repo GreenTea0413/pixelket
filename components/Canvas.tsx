@@ -43,7 +43,7 @@ export default function Canvas() {
       if (width >= 1650) {
         // PC 크기
         setContainerSize({ width: 1400, height: 700 });
-      } else if (width >= 1450) {
+      } else if (width >= 1500) {
         // 중간 크기
         setContainerSize({ width: 1280, height: 600 });
       } else {
