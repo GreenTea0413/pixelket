@@ -1,8 +1,8 @@
 # Pixelket
 
 🎨 **Live Demo**: [https://pixelket.vercel.app/](https://pixelket.vercel.app/)
-
 웹 기반 픽셀 아트 에디터
+Claude와 함께 작업
 
 ## 만든 이유
 
